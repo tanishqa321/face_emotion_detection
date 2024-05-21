@@ -1,0 +1,2 @@
+This project involves facial emotion detection using OpenCV and Keras. It is capable of detecting emotions on individuals' faces in real-time as well as in static images. The model has been trained on a provided training dataset, the zip file for which is attached, along with a corresponding Google Colab link. The current model architecture utilizes three layers; however, increasing the number of layers may potentially enhance the accuracy of the model.
+
