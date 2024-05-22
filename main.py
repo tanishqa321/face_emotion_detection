@@ -1,3 +1,4 @@
+import sys
 import os
 import cv2
 import numpy as np
@@ -8,9 +9,20 @@ from keras.preprocessing.image import load_img, img_to_array
 from keras.models import  load_model
 import matplotlib.pyplot as plt
 import numpy as np
+from keras.layers import DepthwiseConv2D
+class CustomDepthwiseConv2D(DepthwiseConv2D):
+    def __init__(self, **kwargs):
+        if 'groups' in kwargs:
+            del kwargs['groups']
+        super(CustomDepthwiseConv2D, self).__init__(**kwargs)
+os.environ["PYTHONIOENCODING"] = "utf-8"
 
+# Alternatively, set default encoding for stdout and stderr
+sys.stdout.reconfigure(encoding='utf-8')
+sys.stderr.reconfigure(encoding='utf-8')
 # load model
-model = load_model("best_model.h5")
+model_path = "C:/Users/Tanishka Kumari/Desktop/emdetection/best_model.h5"
+model = load_model(model_path, custom_objects={'DepthwiseConv2D': CustomDepthwiseConv2D})
 
 
 face_haar_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
